@@ -7,4 +7,4 @@ old account (lost access, cant modify): [https://github.com/RosyExploits/](https
 
 OnWorksVM: [here](https://rosystuff.github.io/redirin?redirect=https://rosystuff.github.io/onworks.html)
 
-whenismynextytvid: [here](https://rosystuff.github.io/redirin?redirect=/when.md)
+whenismynextytvid: [here](https://rosystuff.github.io/redirin?redirect=/when/)
