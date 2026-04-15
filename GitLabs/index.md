@@ -1,4 +1,4 @@
-[RosyStuff](https://github.com/RosyStuff/)***[GitLabs](https://github.com/RosyStuff/rosystuff-gitlabs/)***
+./[RosyStuff](https://github.com/RosyStuff/)/***[GitLabs](https://github.com/RosyStuff/rosystuff-gitlabs/)***
 
 [MC Mods](https://github.com/RosyStuff/rosystuff-gitlabs/tree/main/MC%20Mods)
     |
