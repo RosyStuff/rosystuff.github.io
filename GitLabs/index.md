@@ -1,6 +1,6 @@
 ***./[RosyStuff](https://github.com/RosyStuff/)/[GitLabs](https://github.com/RosyStuff/rosystuff-gitlabs/)***
 
-[Up Directory](ㅤrosystuff.github.io
+[Up Directory](ㅤrosystuff.github.io)
 
 [MC Mods](https://github.com/RosyStuff/rosystuff-gitlabs/tree/main/MC%20Mods)
     |
