@@ -1,3 +1,5 @@
+../[RosyStuff](https://rosystuff.github.io/redirin?redirect=https://github.com/RosyStuff)/home
+
 welcome to my page
 
 im rosy
@@ -9,5 +11,6 @@ OnWorksVM: [here](https://rosystuff.github.io/redirin?redirect=https://rosystuff
 
 whenismynextytvid: [here](https://rosystuff.github.io/redirin?redirect=/when/)
 
+GitLabs (Website): [here](https://rosystuff.github.io/redirin?redirect=https://rosystuff.github.io/GitLabs/)
 
-<a href="https://minecraftservers.org/server/686016" target="_blank"><img src="https://status.minecraftservers.org/classic/686016.png" alt="FinalLifeRun Minecraft server" width="540" height="90" /></a>
+GitLabs (Repo): [here](https://rosystuff.github.io/redirin?redirect=https://github.com/RosyStuff/rosystuff-gitlabs/)
