@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>P2C - P2P Chat</title>
+    <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #121212; color: #00ff00; }
+        #chat-box { height: 300px; border: 1px solid #555; overflow-y: scroll; padding: 10px; margin-bottom: 10px; background: #1a1a1a; }
+        input { background: #222; color: #fff; border: 1px solid #444; padding: 5px; margin: 5px 0; }
+        .settings-box { border: 1px solid #333; padding: 10px; margin-bottom: 10px; }
+        button { cursor: pointer; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <h2 id="room-title">P2C</h2>
+    
+    <div class="settings-box">
+        <strong>Room Settings:</strong><br>
+        <input id="title-input" placeholder="New Room Title">
+        <button onclick="updateTitle()">Update Title</button><br>
+        <label><input type="checkbox" id="show-time"> Show Timestamps</label>
+    </div>
+
+    <h3>Your ID: <span id="my-id">Connecting...</span></h3>
+    
+    <div>
+        <input id="name-input" placeholder="Enter your name">
+        <button onclick="setName()">Set Name</button>
+    </div>
+
+    <div id="chat-box"></div>
+    
+    <input id="peer-id" placeholder="Partner's ID">
+    <button onclick="connect()">Connect</button>
+    <button onclick="closeConnection()">Disconnect</button>
+    <br>
+    <!-- Limit added here: maxlength="256" -->
+    <input id="msg" placeholder="Message (Max 256)" maxlength="256">
+    <button id="send-btn" onclick="send()">Send</button>
+
+    <script>
+        const peer = new Peer();
+        let conn;
+        let myName = "Guest";
+        let isCoolingDown = false;
+
+        setTimeout(() => {
+            if (conn) conn.close();
+            alert("Session expired (3 hours).");
+        }, 3 * 60 * 60 * 1000);
+
+        peer.on('open', (id) => { document.getElementById('my-id').innerText = id; });
+
+        function updateTitle() {
+            const title = document.getElementById('title-input').value;
+            if(title) document.getElementById('room-title').innerText = title;
+        }
+
+        function setName() {
+            myName = document.getElementById('name-input').value || "Guest";
+        }
+
+        peer.on('connection', (c) => { 
+            conn = c; 
+            setupListeners();
+            alert("Partner connected!");
+        });
+
+        function connect() {
+            const peerId = document.getElementById('peer-id').value;
+            conn = peer.connect(peerId);
+            setupListeners();
+        }
+
+        function setupListeners() {
+            conn.on('data', (data) => {
+                document.getElementById('chat-box').innerHTML += `<p>${data}</p>`;
+            });
+            conn.on('close', () => {
+                document.getElementById('chat-box').innerHTML += `<p><i>Partner disconnected.</i></p>`;
+                conn = null;
+            });
+        }
+
+        function closeConnection() {
+            if (conn) {
+                conn.close();
+                conn = null;
+                document.getElementById('chat-box').innerHTML += `<p><i>You disconnected.</i></p>`;
+            }
+        }
+
+        function send() {
+            if (isCoolingDown) return;
+            const msgInput = document.getElementById('msg');
+            const m = msgInput.value;
+            const time = document.getElementById('show-time').checked ? ` [${new Date().toLocaleTimeString()}]` : "";
+            
+            if(conn && m.trim() !== "") {
+                const formattedMsg = `${myName}${time}: ${m}`;
+                conn.send(formattedMsg);
+                document.getElementById('chat-box').innerHTML += `<p>You: ${formattedMsg}</p>`;
+                msgInput.value = '';
+
+                isCoolingDown = true;
+                const btn = document.getElementById('send-btn');
+                btn.disabled = true;
+                setTimeout(() => { isCoolingDown = false; btn.disabled = false; }, 3000);
+            } else if (!conn) {
+                alert("Not connected to anyone yet.");
+            }
+        }
+    </script>
+</body>
+</html>
